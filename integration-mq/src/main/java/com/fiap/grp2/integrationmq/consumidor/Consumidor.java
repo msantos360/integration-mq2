@@ -23,7 +23,7 @@ public class Consumidor {
 		RabbitTemplate template = new RabbitTemplate(RabbitMqConfig.getConnection());
 
 		final String SKIP_LINE = System.getProperty("line.separator");
-		Email email = new Email();
+		//Email email = new Email();
 		String message;
 		List<SensorDto> listSensorDto = new ArrayList<SensorDto>();
 		Gson gson = new Gson();
@@ -47,8 +47,8 @@ public class Consumidor {
 					
 					sensorDto.setAlarmeTemperatura("Alarme de temperatura. Email disparado.");
 
-					 email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(),
-					 conteudo.toString());
+					 /*email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(),
+					 conteudo.toString());*/
 				}
 
 				if (ativarAlarmUmid(sensorDto.getUmidade())) {
@@ -61,8 +61,8 @@ public class Consumidor {
 							.append(sensorDto.getLatitude());
 
 					sensorDto.setAlarmeUmidade("Alarme de umidade. Email disparado.");
-					email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(),
-					conteudo.toString());
+					/*email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(),
+					conteudo.toString());*/
 				}
 								
 				Thread.sleep(SLEEP_TIME_MILLIS);
