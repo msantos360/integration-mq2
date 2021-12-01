@@ -43,10 +43,16 @@ export class DronesComponent implements OnInit {
   
   startConsumidor() {
     this.service.getConsumidor().subscribe(
-      (res) => {
-        this.responseConsumidor = res;
-        console.log(`Response Consumidor ${res}`);
-        alert("Informações recebidas!");
+      (res) => {        
+        let count = res.objeto.mensagens.length;
+        if(count.valueOf() > 0) {
+          console.log(`Response Consumidor ${res}`);
+          this.responseConsumidor = res;
+          alert("Informações recebidas!");
+        } else {
+          alert("Sem mensagens a ser recebidas, tente novamente mais tarde!");
+        }
+        
       },(error: HttpErrorResponse) => {
         console.log(`Error: ${error.error}`);
       }
