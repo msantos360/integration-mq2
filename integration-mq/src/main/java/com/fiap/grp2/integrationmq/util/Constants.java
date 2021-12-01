@@ -25,7 +25,7 @@ public class Constants {
     public static final String GMAIL_USERNAME = "grupo2.fiap@gmail.com";
     public static final String GMAIL_PASSWD = "1234$#@!k";
 
-    public static final String EMAIL_DESTINO = "michael.shel96@gmail.com";
+    public static final String EMAIL_DESTINO = "email.de.destino.aqui@email.com";
 
 }
 
