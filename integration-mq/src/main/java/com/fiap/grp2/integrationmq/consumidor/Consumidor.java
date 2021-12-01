@@ -19,11 +19,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 public class Consumidor {
-	public static List<SensorDto> CONSOME_MENSAGENS() {
+	public List<SensorDto> CONSOME_MENSAGENS() {
 		RabbitTemplate template = new RabbitTemplate(RabbitMqConfig.getConnection());
 
 		final String SKIP_LINE = System.getProperty("line.separator");
-		//Email email = new Email();
+		Email email = new Email();
+		boolean emailSend = false;
+		boolean emailSend2 = false;
 		String message;
 		List<SensorDto> listSensorDto = new ArrayList<SensorDto>();
 		Gson gson = new Gson();
@@ -47,8 +49,11 @@ public class Consumidor {
 					
 					sensorDto.setAlarmeTemperatura("Alarme de temperatura. Email disparado.");
 
-					 /*email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(),
-					 conteudo.toString());*/
+					 if(!emailSend)
+					 {
+						 email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(), conteudo.toString());
+						 emailSend = true;
+					 }
 				}
 
 				if (ativarAlarmUmid(sensorDto.getUmidade())) {
@@ -61,8 +66,11 @@ public class Consumidor {
 							.append(sensorDto.getLatitude());
 
 					sensorDto.setAlarmeUmidade("Alarme de umidade. Email disparado.");
-					/*email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(),
-					conteudo.toString());*/
+					
+					if(!emailSend2) {
+						email.sendGmailSimpleMail(Constants.EMAIL_DESTINO, assunto.toString(), conteudo.toString());
+						emailSend2 = true;
+					}
 				}
 								
 				Thread.sleep(SLEEP_TIME_MILLIS);
